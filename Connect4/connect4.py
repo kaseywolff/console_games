@@ -7,7 +7,7 @@ BOARD_SIZE = 7
 NEEDED_TO_WIN = 4 # how many you need to get in a row to win the game
 
 
-# print function for column header/ footer
+# print function for printing column header/ footer
 def print_header_footer():
   print('  ', end='')
   for i in range(BOARD_SIZE):
@@ -15,7 +15,7 @@ def print_header_footer():
   print()
   
 
-# print board to console
+# print board to console function
 def print_board(board):
   # print column number header
   print_header_footer()
@@ -38,13 +38,25 @@ def print_board(board):
   print()
 
 
+# function to prompt player to enter the number of the column they'd like to place their piece in
+def player_move_input(player_symbol):
+  while True:
+    try:
+      column = int(input(f'Player {player_symbol}, enter the column number you want to drop your piece into: '))
+      if 0 <= column < BOARD_SIZE:
+        return column
+    except ValueError:
+      pass
+    print('Invalid input. Please enter a number between 0 and', BOARD_SIZE-1)
+
 
 def play_game():
   board = [['.' for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
   current_player = PLAYER1_SYMBOL
 
-  # while True:
-  print_board(board)
+  while True:
+    print_board(board)
+    column = player_move_input(current_player)
 
 
 if __name__ == '__main__':
