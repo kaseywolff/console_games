@@ -53,11 +53,11 @@ def player_move_input(player_symbol):
 # function to check if the move is valid
 def is_valid_move(board, column):
   # loop through row #s, starting from the bottom. in this case, the bottom row is the board size - 1
-  for i in range(BOARD_SIZE - 1, -1, -1):
+  for i in range(BOARD_SIZE-1, -1, -1):
     # if the row in the specified column is empty ('.'), return the row #
     if board[i][column] == '.':
       return i
-    return -1
+  return -1
   
 
 # function to execute a move on the board
@@ -82,6 +82,10 @@ def play_game():
   while True:
     print_board(board)
     column = player_move_input(current_player)
+    make_move(board, current_player, column)
+
+    # logic to switch turns
+    current_player = PLAYER2_SYMBOL if current_player == PLAYER1_SYMBOL else PLAYER1_SYMBOL
 
 
 if __name__ == '__main__':
