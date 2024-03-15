@@ -72,7 +72,12 @@ def make_move(board, player_symbol, column):
 
 
 # function to check if the player has won
-
+def check_win(board, player_symbol):
+  # check for a row win
+  for row in range(BOARD_SIZE):
+    for col in range(BOARD_SIZE - 3):
+      if board[row][col] == player_symbol and board[row][col+1] == player_symbol and board[row][col+2] == player_symbol and board[row][col+3] == player_symbol:
+        return True
 
 
 def play_game():
@@ -83,6 +88,12 @@ def play_game():
     print_board(board)
     column = player_move_input(current_player)
     make_move(board, current_player, column)
+    # see if there's a winner. end the game if there is
+    if check_win(board, current_player):
+      print_board(board)
+      print()
+      print(f'Player {current_player}, you win!\n')
+      return
 
     # logic to switch turns
     current_player = PLAYER2_SYMBOL if current_player == PLAYER1_SYMBOL else PLAYER1_SYMBOL
